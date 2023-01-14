@@ -17,16 +17,18 @@ const NavigationBar = props=>{
     return (
         <>
         <div className={classes.navDesktop}>
-            {/* {props.social ? <p className={classes.active}> 
-                Social
-            </p> : <p onClick={()=> changeRoute('/social')}>
-                Social
-            </p> // routing 
-            } */}
+
+            {props.chat ? <p className={classes.active}>Chat</p> : <p
+            onClick={()=>changeRoute('/chat')}>
+                    Chat
+                </p>}
             {props.home ? <p className={classes.active}>Home</p> : 
             <p onClick={()=> changeRoute('/')}>
                 Home
             </p> }
+            <p>
+                Calculator
+            </p>
             {props.about ? <p className={classes.active}>About</p> :
             <p onClick={()=> changeRoute('/about')}>
                 About
@@ -38,12 +40,7 @@ const NavigationBar = props=>{
                 <li>
                     <img src={require('../../images/messenger.png')} alt="messenger logo" width='50%' height='50%' style={{marginLeft: 10,marginBottom: 10}}/>
                 </li>
-                <li>{props.social ? <p className={classes.active}> 
-                    Social
-                </p> : <p onClick={()=> changeRoute('/social')}>
-                    Social
-                </p> // routing 
-                }</li>
+
                 <li>
                 {props.home ? <p className={classes.active}>Home</p> : 
                 <p onClick={()=> changeRoute('/')}>

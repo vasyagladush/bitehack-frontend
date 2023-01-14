@@ -41,7 +41,7 @@ const LandingPage = props=>{
           <Form.Group controlId="formBasicEmail">
             <Form.Control type="text" placeholder="Enter Email" className={classes.input} style={{width: '50%'}} name="email" onChange={inputHandler} value={state.email}/>
           </Form.Group>
-          <Form.Group controlId="formBasicLogin">
+          <Form.Group style={{marginTop: "25px"}} controlId="formBasicLogin">
             <Form.Control type="password" placeholder="Enter Password" className={classes.input} style={{width: '50%'}} name="password" onChange={inputHandler} value={state.password}/>
           </Form.Group>
           { state.loading ? <Spinner animation="border" variant="dark"/> :

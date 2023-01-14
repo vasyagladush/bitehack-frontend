@@ -13,8 +13,11 @@ const RegisterPage = props=>{
       password: '',
       gender: '',
       country: '',
-      dateBirth: new Date("2000-01-01"),
+      dateBirth:"2000-01-01",
       subjects: [],
+      subjectName: '',
+      subjectPercent: '',
+      subjectLevel: ''
     });
     const inputHandler = event =>{
       setState({
@@ -23,19 +26,49 @@ const RegisterPage = props=>{
       });
     }
 
-    const submitUser = ()=>{
-      axios.post(url+'/auth/signup',{
-      ...state
-      })
-      .then(response=>{
-        localStorage.setItem('token',response.data.token);
-        props.history.push('/');
-        window.location.reload(false);
-      })
-      .catch(err=>{
-        console.log(err);
-      })
+    const submitUser = async()=>{
+      const response = await axios.post(url+'/auth/signup',{
+        ...state
+      });
+      console.log(response.data);
+      if(response.data.token){
+        localStorage.setItem("token",response.data.token);
+        window.location.href="/";
+      }
+
     }
+
+    const addSubject = ()=>{ 
+      const subjects = state.subjects;
+      subjects.push({
+          name: state.subjectName,
+          level: state.subjectLevel, 
+          percent: state.subjectPercent
+      });
+      setState(prevState=>{
+        return {
+          ...prevState, 
+          subjects: subjects
+        }
+      });
+    };    
+
+    const deleteSubject = (index)=> { 
+      console.log(index);
+      const real_subjects = [];
+      const subjects = state.subjects;
+      subjects.filter((subject,index2)=>{
+        if(index2 != index){
+          real_subjects.push(subject);
+        }
+      }); 
+      setState(prevState=> { 
+        return {
+          ...prevState,
+          subjects: real_subjects
+        }
+      })
+    };
 
     return(
         <>
@@ -52,21 +85,45 @@ const RegisterPage = props=>{
           <Form.Group >
             <Form.Control type="text" placeholder="Enter Full Name"  style={{width: '50%',margin: 'auto'}}  name="fullname" value={state.fullname} onChange={inputHandler}/>
           </Form.Group>
-          <Form.Group>
-            <Form.Select size="lg">
-              <option>
-                Female
-              </option>
-              <option>
-                Male
-              </option>
-            </Form.Select>
-
-          </Form.Group>
+            <Form.Control type="text"  placeholder="Enter Gender"  style={{width: '50%',margin: 'auto'}}  name="gender" value={state.gender} onChange={inputHandler}/>
           <Form.Group>
             <Form.Control type="password" placeholder="Enter Password" style={{width: '50%',margin: 'auto'}}  name="password" value={state.password} onChange={inputHandler}/>
           </Form.Group>
-          <Button variant='dark' style={{marginBottom: '30px'}} onClick={submitUser}>
+          <Form.Group>
+            <Form.Control type="text" placeholder="Enter Country" style={{width: '50%',margin: 'auto'}}  name="country" value={state.country} onChange={inputHandler}/>
+          </Form.Group>
+          <Form.Group>
+            <Form.Control type="date" style={{width: '50%',margin: 'auto'}}  name="dateBirth" value={state.dateBirth} onChange={inputHandler}/>
+          </Form.Group>
+          <h2>Add Subjects:</h2>
+          
+          <Form.Group>
+            <Form.Control placeholder='subject name' type="text" style={{width: '50%',margin: 'auto'}}  name="subjectName" value={state.subjectName} onChange={inputHandler}/> 
+          </Form.Group>
+          <Form.Group>
+            <Form.Control placeholder='subject percent' type="text" style={{width: '50%',margin: 'auto'}}  name="subjectPercent" value={state.subjectPercent} onChange={inputHandler}/>
+          </Form.Group>
+          <Form.Group>
+            <Form.Control placeholder='subject level' type="text" style={{width: '50%',margin: 'auto'}}  name="subjectLevel" value={state.subjectLevel} onChange={inputHandler}/>
+          </Form.Group>
+          <div>
+          <Button style={{marginBottom: '30px'}} onClick={addSubject}>
+            Add Subject
+          </Button>
+          </div>
+          <div>
+            <h2>Subjects:</h2>
+            {state.subjects.map((subject,index)=>{
+              return (
+                <div  style={{border: '1px solid black'}}>
+                  <p style={{cursor:'pointer'}} onClick={()=>deleteSubject(index)}>Delete</p>
+                      <h2>{subject.name} {subject.level} {subject.percent}</h2>
+                </div>
+              )
+            })}
+          </div>
+
+          <Button variant='dark' style={{marginBottom: '50px '}} onClick={submitUser}>
             Register
          </Button>
         </Form> 

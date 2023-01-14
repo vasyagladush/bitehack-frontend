@@ -19,18 +19,18 @@ const Panel = props=>{
         surname: ''
     }); 
     useEffect(()=>{
-        axios.get(url+'/user/me',{
-            headers:{
-                'Authorization': 'Bearer '+localStorage.getItem('token')
-            }
-        })
-        .then(response=>{
-            props.setMe(response.data.id);
-            setState({
-                name: response.data.name,
-                surname: response.data.surname
-            })
-        })
+        // axios.get(url+'/user/me',{
+        //     headers:{
+        //         'Authorization': 'Bearer '+localStorage.getItem('token')
+        //     }
+        // })
+        // .then(response=>{
+        //     props.setMe(response.data.id);
+        //     setState({
+        //         name: response.data.name,
+        //         surname: response.data.surname
+        //     })
+        // })
     },[props])
     return (
         <>
@@ -39,13 +39,11 @@ const Panel = props=>{
                     localStorage.removeItem('token');
                     window.location.reload(false);
                 }}>logout</Button>
-            </div>
+            </div>  
             <Navigation home history={props.history}/>
-            <FriendsBar title="Friends">
-                <Users/>
-            </FriendsBar>  
-            <InformationUser name={state.name} surname={state.surname}/>
-        {props.personId&&props.meId ? <Messenger messages={props.messages}/> : <h1 className={classes.h1}>Choose friend or Add him <Emoji symbol="🧔"/></h1> }
+                {
+                    // info
+                }
         </>
     )
 };

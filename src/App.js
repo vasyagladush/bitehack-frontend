@@ -6,6 +6,7 @@ import NotFind from './components/NotFind/NotFind';
 import Panel from './containers/Panel/Panel';
 import Social from './containers/Social/Social';
 import Register from './containers/RegisterPage/RegisterPage';
+import Chat from "./containers/Chat/Chat";
 
 function App() {
   return (
@@ -15,8 +16,11 @@ function App() {
         <Route path="/" exact component={Panel}/> :
         <Route path="/" exact component={LandingPage}/>
         }
+
+<Route path="/chat" exact component={Chat}/>
         <Route path="/about" component={About}/>
-        <Route path="/social" component={Social}/>
+
+        {/* <Route path="/social" component={Social}/> */}
         <Route path="/register" component={Register}/>
         <Route component={NotFind}/>
       </Switch>
