@@ -5,11 +5,11 @@ import Emoji from '../../components/Emoji/Emoji';
 import {Form,Button,Image,Spinner} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import {url} from '../../ApiUrl';
+import {url} from '../../ApiUrl.js';
 
 const LandingPage = props=>{
     const [state,setState]= useState({
-        login: '',
+        email: '',
         password: '',
         error: undefined,
         loading: false
@@ -22,40 +22,24 @@ const LandingPage = props=>{
       });
     }
     
-    const login = ()=>{
-      setState({
-        ...state,
-        loading: true
-      });
-      axios.post(url+'/auth/login',{ 
-        login: state.login,
+    const login = async ()=>{
+      const response = await axios.post(url+'/auth/login',{
+        email: state.email,
         password: state.password
-      })
-      .then(response=>{
-        localStorage.setItem('token',response.data.token);
-        window.location.reload(false);
-        setState({
-          ...state,
-          loading: false
-        });
-      })
-      .catch(err=>{
-        setState({
-          ...state,
-          error: err,
-          loading: false
-        });
-      })
-    }
+      });
+
+      localStorage.setItem("token",response.data.token);
+      window.location.reload();
+      }
 
     return (
         <>
         <Navigation home history={props.history}/>
-        <Image width='300' height='300' src={require('../../images/messenger.png')} className={classes.image}/>
+        {/* <Image width='300' height='300' src={require('../../images/messenger.png')} className={classes.image}/> */}
       <div className={classes.LandingPage}>
         <Form style={{marginTop: '25px'}}>
           <Form.Group controlId="formBasicEmail">
-            <Form.Control type="text" placeholder="Enter Login" className={classes.input} style={{width: '50%'}} name="login" onChange={inputHandler} value={state.login}/>
+            <Form.Control type="text" placeholder="Enter Email" className={classes.input} style={{width: '50%'}} name="email" onChange={inputHandler} value={state.email}/>
           </Form.Group>
           <Form.Group controlId="formBasicLogin">
             <Form.Control type="password" placeholder="Enter Password" className={classes.input} style={{width: '50%'}} name="password" onChange={inputHandler} value={state.password}/>
