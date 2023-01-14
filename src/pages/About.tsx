@@ -4,7 +4,7 @@ import Layout from "../containers/Layout";
 
 const AboutPage: React.FunctionComponent = () => {
   const { t } = useTranslation();
-  return <Layout title={t("pageTitles:aboutPage")}>About page</Layout>;
+  return <Layout title={t("pageTitles:aboutPage")}>TEST ABOUT page</Layout>;
 };
 
 export default AboutPage;
