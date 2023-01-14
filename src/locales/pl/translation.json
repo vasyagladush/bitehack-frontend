@@ -20,7 +20,7 @@
     "passwordTitle": "Password",
     "nextButton": "Next",
     "forgotPassword": "Forgot password?",
-    "requiredName": "Name is required!",
+    "emailRequired": "Name is required!",
     "noAccount": "Don't have an account?",
     "haveAccount": "Have an account?",
     "signUp": "Sign up",

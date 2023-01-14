@@ -27,22 +27,25 @@ const App: React.FunctionComponent = () => {
     }
   }, [searchParams]);
 
-  // const currentUserId = useSelector<RootState>(
-  //   (store) => store.user.authUser._id
-  // );
+  const currentUserId = useSelector<RootState>(
+    (store) => store.user.authUser._id
+  );
 
   return (
     <div>
       <Routes>
-        <Route path="/" element={<AuthorizationPage />} />
-        {/* <Route
+        <Route
+          path="/"
+          element={currentUserId ? <HomePage /> : <AuthorizationPage />}
+        />
+        <Route
           path="/about"
           element={currentUserId ? <AboutPage /> : <AuthorizationPage />}
         />
         <Route
           path="/authorization"
           element={currentUserId ? <HomePage /> : <AuthorizationPage />}
-        /> */}
+        />
       </Routes>
     </div>
   );

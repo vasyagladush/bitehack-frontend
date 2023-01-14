@@ -28,7 +28,7 @@ const LoginForm = () => {
   };
   const { t } = useTranslation();
   const sampleSchema = yup.object().shape({
-    username: yup.string().required(t("login.requiredName")),
+    email: yup.string().required(t("login.emailRequired")),
   });
   const {
     register,

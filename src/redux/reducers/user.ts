@@ -32,8 +32,7 @@ const userInitialState: UserStore = {
 };
 interface RegisterResponse {
   user: Partial<User>;
-  accessToken: string;
-  refreshToken: string;
+  token: string;
 }
 interface RegisterRequest {
   fullname: string;
@@ -48,8 +47,7 @@ interface RegisterRequest {
 
 interface LoginResponse {
   user: Partial<User>;
-  accessToken: string;
-  refreshToken: string;
+  token: string;
 }
 
 interface LoginRequest {
@@ -87,6 +85,7 @@ const loginUser = createAsyncThunk<LoginResponse, LoginRequest>(
       email,
       password,
     });
+    console.log(response);
     return response.data;
   }
 );
@@ -118,15 +117,13 @@ const userSlice = createSlice({
     });
     builder.addCase(registerUser.fulfilled, (store, { payload }) => {
       store.authUser.error = undefined;
-      localStorage.setItem("accessToken", payload.accessToken);
-      localStorage.setItem("refreshToken", payload.refreshToken);
+      localStorage.setItem("accessToken", payload.token);
       Object.assign(store.authUser, {
         ...userInitialState.authUser,
         ...payload.user,
         auth: {
           local: {
-            accessToken: payload.accessToken,
-            refreshToken: payload.refreshToken,
+            accessToken: payload.token,
           },
         },
       });
@@ -141,15 +138,13 @@ const userSlice = createSlice({
     });
     builder.addCase(loginUser.fulfilled, (store, { payload }) => {
       store.authUser.error = undefined;
-      localStorage.setItem("accessToken", payload.accessToken);
-      localStorage.setItem("refreshToken", payload.refreshToken);
+      localStorage.setItem("accessToken", payload.token);
       Object.assign(store.authUser, {
         ...userInitialState.authUser,
         ...payload.user,
         auth: {
           local: {
-            accessToken: payload.accessToken,
-            refreshToken: payload.refreshToken,
+            accessToken: payload.token,
           },
         },
       });

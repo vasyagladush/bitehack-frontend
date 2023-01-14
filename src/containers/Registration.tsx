@@ -288,6 +288,26 @@ const Registration = () => {
                     )
                   }
                 />
+                   <StyledFormFloating className="form-floating mt-3">
+          <Form.Control
+            className="form-control"
+            type="text"
+            name={`subjects.${index}.name`}
+            placeholder={t("validation:fields.confirmPassword")}
+            autoComplete="on"
+          />
+          <StyledLabel
+            className="pt-1 text-muted"
+            htmlFor="floatingInputCustom"
+          >
+            {t("validation:fields.confirmPassword")}
+          </StyledLabel>
+        </StyledFormFloating>
+        {errors.confirmPassword && (
+          <p className="text-danger fst-italic fs-6 mt-1">
+            {t(`${errors?.confirmPassword?.message}`)}
+          </p>
+        )}
                 <TextFormField
                   name={`transactions.${index}.reference`}
                   control={control as any}
