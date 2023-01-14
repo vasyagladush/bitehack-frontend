@@ -1,0 +1,40 @@
+{
+  "test": "English",
+
+  "notAuthorized": "You are not authorized",
+
+  "homepage": {
+    "title": "Home",
+    "button": {
+      "title": "Home"
+    }
+  },
+
+  "login": {
+    "loginButton": "Login",
+    "loginTitle": "Sign in to Bitehack",
+    "signGoogle": "Continue with Google",
+    "signApple": "Continue with Apple",
+    "or": "or",
+    "usernameTitle": "Phone, email, or username",
+    "passwordTitle": "Password",
+    "nextButton": "Next",
+    "forgotPassword": "Forgot password?",
+    "requiredName": "Name is required!",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Have an account?",
+    "signUp": "Sign up",
+    "signIn": "Sign in"
+  },
+  "search": {
+    "placeholder": "Search"
+  },
+  "authorization": {
+    "mainTitle": "BITEhack KlubR",
+    "secondTitle": "Witamy"
+  },
+
+  "navigationBar": {
+    "home": "Home"
+  }
+}

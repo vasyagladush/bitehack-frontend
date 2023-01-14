@@ -1,1 +1,1 @@
-# bitehack-frontend
+Bitehack KlubR Portal Frontend
