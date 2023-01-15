@@ -53,6 +53,9 @@ const Chats = (props) => {
 
     props.setMessages(response.data.messages);
     props.setUser(response.data.user);
+    console.log(response.data.user);
+    console.log(chat);
+    console.log(props.consultant);
   };
   const handleInput = (event)=>{ 
     setInput(event.target.value);
@@ -68,11 +71,13 @@ const Chats = (props) => {
       }
     });
 
-    console.log(response.data);
+    // console.log(response.data);
 
     props.addMessage({sender: response.data.consultant._id,
       message: response.data.message
-    })
+    });
+
+    setInput("");
 
   };
 
@@ -96,6 +101,7 @@ const Chats = (props) => {
               />
               <h1>{chat.user.fullname}</h1>
               <ul key={chat.user._id}>
+                <li>Debug ID: {chat.user._id}</li>
                 <li>Status: {chat.status}</li>
                 <li>{chat.user.fullname}</li>
                 <li>{chat.user.country}</li>

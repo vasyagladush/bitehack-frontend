@@ -48,7 +48,7 @@ const Consultants = (props) => {
       // console.log(data.userSender);
       // console.log(data.user._id,props.user);
       if(!data.userSender && data.user._id == props.user._id){ // and message for this exact user
-        console.log(data);
+        // console.log(data);
         props.addMessage({
         message: data.message,
         sender: data.consultant._id
@@ -97,12 +97,11 @@ const Consultants = (props) => {
       }
   });
 
-  // const messages = props.messages;
-
   props.addMessage({
     sender: response.data.userSender ? response.data.user._id : response.data.consultant._id,
     message: response.data.message
   });
+  setInput("");
   };
 
   return (
