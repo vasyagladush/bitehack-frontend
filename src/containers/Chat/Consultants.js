@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import NavigationBar from "../../components/Navigation/Navigation";
 import Messenger from "../Messenger/Messenger";
 import axios from "axios";
@@ -11,11 +11,20 @@ import ContentWrapper from "../../components/ContentWrapper";
 
 const socket = openSocket(url);
 const Consultants = (props) => {
+  const messagesEndRef = useRef(null);
   const [state, setState] = useState({
     consultants: [],
+    showMessages: false
   });
 
   const [input,setInput]= useState("");
+
+  const scrollToBottom = ()=>{
+    messagesEndRef.current.scrollIntoView({behavior: 'smooth'});
+  };
+
+  useEffect(scrollToBottom,[props.messages]); // scroll if our messages are changed
+
 
   useEffect(() => {
     const fetchConsultants = async () => {
@@ -55,8 +64,21 @@ const Consultants = (props) => {
       }
     });
 
-    props.setMessages(response.data.messages);
-    props.setConsultant(response.data.consultant);
+    if(response.data?.messages.length){
+      props.setMessages(response.data.messages);
+      props.setConsultant(response.data.consultant);
+    }
+    else {
+      setState(prevState=>{
+        return {
+          ...prevState,
+          showMessages: true
+        }
+      });
+      console.log(consultant);
+      props.setConsultant(consultant._id);
+    }
+
 
   };
 
@@ -125,10 +147,24 @@ const Consultants = (props) => {
             })}
 
             <input type="text" onChange={handleInput} value={input}/>
-            <button onClick={sendMessage}>Send Text</button>            
-          </div> : null
-          
+            <button onClick={sendMessage}>Send Text</button>    
+
+          </div> : state.showMessages ? 
+          <div style={{border: '1px solid black', borderRadius: "10px", width: '500px',height:'500px',overflowY: 'auto'}}>
+          {props.messages.map(message=>{
+            return (
+              <p style={{marginTop: '10px'}}>{message.sender}: {message.message}</p>
+            )
+          })}
+
+          <input type="text" onChange={handleInput} value={input}/>
+          <button onClick={sendMessage}>Send Text</button>    
+
+        </div>       : null
       }
+
+<div ref={messagesEndRef}/>
+
 
         </ContentWrapper>
         
