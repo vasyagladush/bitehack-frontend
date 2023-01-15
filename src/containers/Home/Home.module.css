@@ -1,0 +1,31 @@
+.Button { 
+    position: absolute; 
+    margin-left: 20px; 
+    margin-top: 5px;
+    width: 20%;
+    height: 50px;
+}
+
+.h1 {
+    position: absolute;
+    top: 80px;
+    left: 35%;
+}
+
+@media (max-width: 650px) { 
+    .container {
+        text-align: center;
+        margin-right: 10%;  
+    }
+    .Button {
+        margin-top: 10px;
+        margin-left: unset;
+        position: fixed;
+        width: 50%;
+    }
+    .h1 { 
+        left: 30%;
+        font-size: 30px;
+        width: 30%;
+    }
+}
