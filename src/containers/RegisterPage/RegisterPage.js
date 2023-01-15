@@ -57,8 +57,8 @@ const RegisterPage = props=>{
       console.log(index);
       const real_subjects = [];
       const subjects = state.subjects;
-      subjects.filter((subject,index2)=>{
-        if(index2 != index){
+      subjects.forEach((subject,index2)=>{
+        if(index2 !== index){
           real_subjects.push(subject);
         }
       }); 

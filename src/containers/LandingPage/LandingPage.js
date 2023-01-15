@@ -2,7 +2,7 @@ import React,{useState} from 'react';
 import classes from './LandingPage.module.css';
 import Navigation from '../../components/Navigation/Navigation';
 import Emoji from '../../components/Emoji/Emoji';
-import {Form,Button,Image,Spinner} from 'react-bootstrap';
+import {Form,Button,Spinner} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import {url} from '../../ApiUrl.js';

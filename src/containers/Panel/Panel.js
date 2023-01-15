@@ -1,15 +1,8 @@
 import React,{useEffect,useState} from 'react';
 import Navigation from '../../components/Navigation/Navigation';
-import Users from '../Users/Users';
-import FriendsBar from '../../components/FriendsBar/FriendsBar';
-import Emoji from '../../components/Emoji/Emoji';
-import Messenger from '../Messenger/Messenger';
-import InformationUser from '../../components/InformationUser/InformationUser';
 import {connect} from 'react-redux';
 import {Button} from 'react-bootstrap';
 import classes from './Panel.module.css';
-import axios from 'axios';
-import {url} from '../../ApiUrl';
 import * as actions from '../../store/actions/index';
 
 
