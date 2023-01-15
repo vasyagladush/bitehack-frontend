@@ -121,7 +121,7 @@ const Consultants = (props) => {
                 width="200x"
                 height="200px"
                 style={{ borderRadius: "100px" }}
-                src="https://i.kym-cdn.com/entries/icons/original/000/026/152/gigachad.jpg"
+                src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
               />
               <h1>{consultant.fullname}</h1>
               {consultant.universities.map((university) => {

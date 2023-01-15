@@ -121,7 +121,7 @@ const Chat = props=>{
             {state.consultants.map(consultant=>{
                 return (
                     <div key={consultant._id} onClick={()=>onClickConsultant(consultant)} style={{border: '1px solid black',cursor: 'pointer',width: '500px',height: '400px'}}>
-                        <img width="200x" height="200px" style={{borderRadius: '100px'}} src="https://iet.agh.edu.pl/wp-content/uploads/2021/04/Marek-Gajecki-AGH-WIET.jpg"/>
+                        <img width="200x" height="200px" style={{borderRadius: '100px'}} src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"/>
                         <h1>{consultant.fullname}</h1>
                         {consultant.universities.map(university=>{
                             return (<ul key={university._id}>

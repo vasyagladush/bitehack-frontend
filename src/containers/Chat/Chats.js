@@ -92,7 +92,7 @@ const Chats = (props) => {
                 width="200x"
                 height="200px"
                 style={{ borderRadius: "100px" }}
-                src="https://sun9-66.userapi.com/impg/UuiXNBztRsvaco_9fQoAARXa2NquBJ1sJcyL7w/XtzlGJnQvG0.jpg?size=260x217&quality=95&sign=6c1bc5202f1b032e57b33dc61b469770&type=album"
+                src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
               />
               <h1>{chat.user.fullname}</h1>
               <ul key={chat.user._id}>
