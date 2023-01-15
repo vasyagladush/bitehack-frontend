@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navigation from "../../components/Navigation/Navigation";
 import { connect } from "react-redux";
 import styled from "styled-components";
 import * as actions from "../../store/actions/index";
 import ContentWrapper from "../../components/ContentWrapper";
+import axios from "axios";
+import {url} from "../../ApiUrl";
 
 const StyledHeader = styled.h2`
   margin-top: 5px;
@@ -22,6 +24,20 @@ const StyledLi = styled.li`
 `;
 
 const Homepage = (props) => {
+  useEffect(()=>{
+    const func = async()=>{
+      const response = await axios.get(url+"/chat/info/me",{
+        headers: {
+          "Authorization": "Bearer "+localStorage.getItem("token")
+        }
+      });
+      console.log(response.data);
+  
+      props.setUser(response.data);
+    }
+    func();
+
+  },[]);
   return (
     <>
       <Navigation home history={props.history} />
@@ -57,7 +73,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setMe: (id) => dispatch(actions.addMe(id)),
+    // setMe: (id) => dispatch(actions.addMe(id)),
+    setUser: (user)=>dispatch(actions.setUser(user))
   };
 };
 

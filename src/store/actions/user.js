@@ -1,9 +1,23 @@
 import * as actionTypes from '../actions/actionTypes';
 
-export const setUser = (personId) =>{
+export const setUser = (user) =>{
     return {
-        type: actionTypes.SET_USER_TO_SEND_MESSAGE,
-        personId: personId
+        type: actionTypes.SET_USER,
+        user: user
+    }
+}
+
+export const setConsultant = (consultant)=>{ 
+    return {
+        type: actionTypes.SET_CONSULTANT,
+        consultant: consultant
+    }
+}
+
+export const setAmIConsultant = () =>{ 
+    return {
+        type: actionTypes.SET_AM_I_CONSULTANT, 
+        amIConsultant: true
     }
 }
 

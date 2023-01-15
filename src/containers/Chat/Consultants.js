@@ -3,11 +3,19 @@ import NavigationBar from "../../components/Navigation/Navigation";
 import Messenger from "../Messenger/Messenger";
 import axios from "axios";
 import { url } from "../../ApiUrl.js";
+import * as actions from '../../store/actions/index';
+import {connect} from 'react-redux';
+import { getByDisplayValue } from "@testing-library/react";
+import openSocket from "socket.io-client";
+import ContentWrapper from "../../components/ContentWrapper";
 
+const socket = openSocket(url);
 const Consultants = (props) => {
   const [state, setState] = useState({
     consultants: [],
   });
+
+  const [input,setInput]= useState("");
 
   useEffect(() => {
     const fetchConsultants = async () => {
@@ -26,9 +34,54 @@ const Consultants = (props) => {
     };
 
     fetchConsultants().catch(console.error);
+    socket.emit("connect");
+    socket.on("message",(data)=> { 
+      // console.log(data.userSender);
+      // console.log(data.user._id,props.user);
+      if(!data.userSender && data.user._id == props.user._id){ // and message for this exact user
+        console.log(data);
+        props.addMessage({
+        message: data.message,
+        sender: data.consultant._id
+      });
+     }
+  });
   }, []);
 
-  const onClickConsultant = () => {};
+  const onClickConsultant = async(consultant) => {
+    const response = await axios.get(url+"/chat/"+consultant._id.toString(),{ 
+      headers: {
+        "Authorization": "Bearer "+ localStorage.getItem("token")
+      }
+    });
+
+    props.setMessages(response.data.messages);
+    props.setConsultant(response.data.consultant);
+
+  };
+
+  const handleInput = (event)=>{
+    setInput(event.target.value);
+  }
+
+
+  const sendMessage = async()=>{ 
+    const response = await axios.post(url+'/chat/message',{
+      personId: props.consultant,
+      message: input
+  },{
+      headers: {
+          "Authorization": "Bearer "+localStorage.getItem("token")
+      }
+  });
+
+  // const messages = props.messages;
+
+  props.addMessage({
+    sender: response.data.userSender ? response.data.user._id : response.data.consultant._id,
+    message: response.data.message
+  });
+  };
 
   return (
     <>
@@ -36,11 +89,13 @@ const Consultants = (props) => {
       <div style={{ width: "50%" }}>
         <h3>Have a question? </h3>
         <h3>Reach out our Consultant!</h3>
+        <ContentWrapper>
         {state.consultants.map((consultant) => {
           return (
             <div
               key={consultant._id}
-              style={{ border: "1px solid black", cursor: "pointer" }}
+              style={{ border: "1px solid black", borderRadius: "10px", cursor: "pointer" }}
+              onClick={()=> onClickConsultant(consultant)}
             >
               <img
                 width="200x"
@@ -60,10 +115,45 @@ const Consultants = (props) => {
             </div>
           );
         })}
-        {/* <Messenger/> */}
+
+        {props.messages.length ? 
+          <div style={{border: '1px solid black', borderRadius: "10px", width: '500px',height:'500px',overflowY: 'auto'}}>
+            {props.messages.map(message=>{
+              return (
+                <p style={{marginTop: '10px'}}>{message.sender}: {message.message}</p>
+              )
+            })}
+
+            <input type="text" onChange={handleInput} value={input}/>
+            <button onClick={sendMessage}>Send Text</button>            
+          </div> : null
+          
+      }
+
+        </ContentWrapper>
+        
       </div>
     </>
   );
 };
 
-export default Consultants;
+const mapStateToProps = state =>{
+  return {
+      consultant: state.consultant,
+      messages: state.messages,
+      user: state.user,
+      amIConsultant: state.amIConsultant
+  }
+};
+
+const mapDispatchToProps = dispatch=>{
+  return {
+      setMessages: (messages)=>dispatch(actions.setMessages(messages)),
+      addMessage: (data)=>dispatch(actions.addMessage(data)),
+      setUser: (user)=>dispatch(actions.setUser(user)),
+      setConsultant: (consultant)=>dispatch(actions.setConsultant(consultant)),
+      setAmIConsultant: ()=>dispatch(actions.setAmIConsultant())
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Consultants); 
