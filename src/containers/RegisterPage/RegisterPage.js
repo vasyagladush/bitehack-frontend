@@ -29,7 +29,6 @@ const RegisterPage = (props) => {
     const response = await axios.post(url + "/auth/signup", {
       ...state,
     });
-    console.log(response.data);
     if (response.data.token) {
       localStorage.setItem("token", response.data.token);
       window.location.href = "/";
@@ -52,7 +51,6 @@ const RegisterPage = (props) => {
   };
 
   const deleteSubject = (index) => {
-    console.log(index);
     const real_subjects = [];
     const subjects = state.subjects;
     subjects.forEach((subject, index2) => {
