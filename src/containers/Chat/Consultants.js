@@ -48,7 +48,7 @@ const Consultants = (props) => {
       // console.log(data.userSender);
       // console.log(data.user._id,props.user);
       if(!data.userSender && data.user._id == props.user._id){ // and message for this exact user
-        console.log(data);
+        // console.log(data);
         props.addMessage({
         message: data.message,
         sender: data.consultant._id
@@ -97,12 +97,11 @@ const Consultants = (props) => {
       }
   });
 
-  // const messages = props.messages;
-
   props.addMessage({
     sender: response.data.userSender ? response.data.user._id : response.data.consultant._id,
     message: response.data.message
   });
+  setInput("");
   };
 
   return (
@@ -123,6 +122,7 @@ const Consultants = (props) => {
                 style={{ borderRadius: "100px" }}
                 src="https://static.vecteezy.com/system/resources/previews/008/442/086/original/illustration-of-human-icon-user-symbol-icon-modern-design-on-blank-background-free-vector.jpg"
               />
+              <p>Debug ID: {consultant._id}</p>
               <h1>{consultant.fullname}</h1>
               {consultant.universities.map((university) => {
                 return (
