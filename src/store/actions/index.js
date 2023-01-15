@@ -2,5 +2,7 @@ export {
  setUser,
  setMessages,
  addMessage,
- addMe
+ addMe,
+ setAmIConsultant,
+ setConsultant,
 } from './user';
