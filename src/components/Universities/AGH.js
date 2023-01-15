@@ -24,8 +24,28 @@ const AGH = (props) => {
     <>
       <Navigation universities history={props.history} />
       <ContentWrapper>
-        <StyledHeader>AGH</StyledHeader>
-        <StyledParagraph>Information: </StyledParagraph>
+        <StyledHeader>
+          We are still in process of gathering the information about this
+          university. Please come check this university later again.
+        </StyledHeader>
+        <StyledParagraph>Here are some useful links: </StyledParagraph>
+        <ul>
+          <StyledLi>
+            <a href="https://www.international.agh.edu.pl/eng/centre-for-international-students/">
+              AGH Internation Students Department
+            </a>
+          </StyledLi>
+          <StyledLi>
+            <a href="https://www.international.agh.edu.pl/eng/scholarships/">
+              AGH Scholarships for Internation Students
+            </a>
+          </StyledLi>
+          <StyledLi>
+            <a href="https://nawa.gov.pl/studenci/studenci-zagraniczni">
+              NAWA Scholarships for Internation Students
+            </a>
+          </StyledLi>
+        </ul>
       </ContentWrapper>
     </>
   );
