@@ -9,19 +9,23 @@ const Consultants = (props) => {
     consultants: [],
   });
 
-  useEffect(async () => {
-    const { data } = await axios.get(url + "/consultant", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
+  useEffect(() => {
+    const fetchConsultants = async () => {
+      const { data } = await axios.get(url + "/consultant", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
 
-    setState((prevState) => {
-      return {
-        ...prevState,
-        consultants: data,
-      };
-    });
+      setState((prevState) => {
+        return {
+          ...prevState,
+          consultants: data,
+        };
+      });
+    };
+
+    fetchConsultants().catch(console.error);
   }, []);
 
   const onClickConsultant = () => {};

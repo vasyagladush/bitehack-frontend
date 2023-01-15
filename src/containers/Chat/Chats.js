@@ -9,19 +9,23 @@ const Chats = (props) => {
     chats: [],
   });
 
-  useEffect(async () => {
-    const { data } = await axios.get(url + "/chat", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
+  useEffect(() => {
+    const fetchChats = async () => {
+      const { data } = await axios.get(url + "/chat", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
 
-    setState((prevState) => {
-      return {
-        ...prevState,
-        chats: data,
-      };
-    });
+      setState((prevState) => {
+        return {
+          ...prevState,
+          chats: data,
+        };
+      });
+    };
+
+    fetchChats().catch(console.error);
   }, []);
 
   const onClickConsultant = () => {};
@@ -50,16 +54,15 @@ const Chats = (props) => {
                 <li>{chat.user.country}</li>
                 <li>{chat.user.dateBirth.split("T")[0]}</li>
                 <li>
-                  {chat.user.subjects.reduce(
-                    (subjectsDescription, currentSubject) =>
-                      currentSubject.name +
-                      " " +
-                      currentSubject.percent +
-                      "% " +
-                      currentSubject.level +
-                      "\n",
-                    ""
-                  )}
+                  {chat.user.subjects.map((subject) => (
+                    <p>
+                      {subject.name +
+                        " " +
+                        subject.percent +
+                        " " +
+                        subject.level}
+                    </p>
+                  ))}
                 </li>
               </ul>
               <UpdateChatStatusButton status="closed" chatId={chat._id}>

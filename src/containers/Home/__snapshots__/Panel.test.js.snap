@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Panel/> matches snapshot 1`] = `
+exports[`<Homepage/> matches snapshot 1`] = `
 Array [
   <button
     className="Button btn btn-dark"

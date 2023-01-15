@@ -1,8 +1,14 @@
 import React from "react";
 import axios from "axios";
 import { url } from "../../ApiUrl.js";
-import {Button} from 'react-bootstrap';
-import classes from '../../containers/Panel/Panel.module.css';
+import styled from "styled-components";
+
+const StyledButton = styled.button`
+  position: absolute;
+  margin-left: calc(100vw - 22%);
+  width: 20%;
+  height: 30px;
+`;
 
 const UpdateChatStatusButton = (props) => {
   const handleClick = async () => {
@@ -17,11 +23,7 @@ const UpdateChatStatusButton = (props) => {
     );
   };
 
-  return (
-    <Button variant="dark" className={classes.Button} onClick={handleClick}>
-      {props.children}
-    </Button>
-  );
+  return <StyledButton onClick={handleClick}>{props.children}</StyledButton>;
 };
 
 export default UpdateChatStatusButton;

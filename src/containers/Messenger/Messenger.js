@@ -1,7 +1,6 @@
 import React,{useState, useEffect,useRef} from 'react';
 import Message from '../../components/Message/Message';
 import classes from './Messenger.module.css';
-import Emoji from '../../components/Emoji/Emoji';
 import {Form,Image} from 'react-bootstrap'; 
 import axios from 'axios';
 import {connect} from 'react-redux';
@@ -68,7 +67,7 @@ const Messenger = props =>{
     }
     else
     {
-        messages = (<p>Type something !<Emoji symbol="✋"/></p>)
+        messages = (<p>Type something !</p>)
     }
     return(
         <div style={{
