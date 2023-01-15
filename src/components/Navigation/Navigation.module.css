@@ -1,9 +1,8 @@
 .navDesktop {
     display: flex;
-    justify-content: center;
-    margin: auto;
-    border: 1px solid black;
+    justify-content: left;
     width: 50%;
+    margin-left: 20px;
 }
 .navDesktop p{
     margin: 10px 10% 10px 10%;

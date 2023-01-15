@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigation from '../Navigation/Navigation';
 
-const notFind = props=>{
+const NotFound = props=>{
     return (
         <>
         <Navigation history={props.history}/>
@@ -10,4 +10,4 @@ const notFind = props=>{
     );
 };
 
-export default notFind;
+export default NotFound;

@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import configureMockStore from 'redux-mock-store';
 import {configure,shallow,mount} from 'enzyme';
 import renderer from 'react-test-renderer';
-import Panel from './Panel';
+import Homepage from './Home';
 import Messenger from '../Messenger/Messenger';
 import InformationUser from '../../components/InformationUser/InformationUser';
 import Users from '../Users/Users';
@@ -25,18 +25,18 @@ let store = configureMockStore()({
 });
 configure({adapter: new Adapter});
 
-describe('<Panel/>',()=>{
+describe('<Homepage/>',()=>{
     let wrapper;
     beforeEach(()=>{
         window.HTMLElement.prototype.scrollIntoView = function() {};
         wrapper = mount(<Provider store={store}>
-            <Panel/>
+            <Homepage/>
         </Provider>);
     });
     it('matches snapshot',()=>{
         wrapper = renderer.create(
         <Provider store={store}>
-            <Panel/>
+            <Homepage/>
         </Provider>
         ).toJSON();
         expect(wrapper).toMatchSnapshot();
@@ -44,7 +44,7 @@ describe('<Panel/>',()=>{
     it('should render button logout',()=>{
         expect(wrapper.find(Button).text()).toEqual('logout');
     });
-    it('should render InformationPanel',()=>{
+    it('should render InformationHomepage',()=>{
         expect(wrapper.find(InformationUser)).toHaveLength(1);
     })
     it('should render messenger component',()=>{
@@ -56,7 +56,7 @@ describe('<Panel/>',()=>{
     it('should render h1 tag if we have no friends',()=>{
         store = configureMockStore()({});
         wrapper = mount(<Provider store={store}>
-            <Panel/>
+            <Homepage/>
         </Provider>);
         expect(wrapper.find('h1').at(2).text()).toEqual('Choose friend or Add him 🧔');
     })
