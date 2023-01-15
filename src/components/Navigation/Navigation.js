@@ -26,7 +26,7 @@ const NavigationBar = props=>{
             <p onClick={()=> changeRoute('/')}>
                 Home
             </p> }
-            <p>
+            <p>``
                 Calculator
             </p>
             {props.about ? <p className={classes.active}>About</p> :
