@@ -109,8 +109,6 @@ const Consultants = (props) => {
     <>
       <NavigationBar chat history={props.history} />
       <div style={{ width: "50%" }}>
-        <h3>Have a question? </h3>
-        <h3>Reach out our Consultant!</h3>
         <ContentWrapper>
         {state.consultants.map((consultant) => {
           return (

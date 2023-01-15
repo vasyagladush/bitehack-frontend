@@ -118,8 +118,6 @@ const Chat = props=>{
         <>
         <NavigationBar chat history={props.history}/>
         <div style={{width: '50%'}}>
-            <h3>Have a question? </h3>
-            <h3>Reach out our Consultant!</h3>
             {state.consultants.map(consultant=>{
                 return (
                     <div key={consultant._id} onClick={()=>onClickConsultant(consultant)} style={{border: '1px solid black',cursor: 'pointer',width: '500px',height: '400px'}}>
