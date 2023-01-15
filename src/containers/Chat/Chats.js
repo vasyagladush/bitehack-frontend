@@ -65,7 +65,12 @@ const Chats = (props) => {
               <UpdateChatStatusButton status="closed" chatId={chat._id}>
                 Mark as Closed
               </UpdateChatStatusButton>
-              
+              <UpdateChatStatusButton
+                status="awaitingConsultantResponse"
+                chatId={chat._id}
+              >
+                Mark as Awaiting Consultant's Response
+              </UpdateChatStatusButton>
             </div>
           );
         })}
