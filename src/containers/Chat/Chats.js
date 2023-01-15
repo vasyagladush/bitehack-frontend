@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavigationBar from "../../components/Navigation/Navigation";
-import Messenger from "../Messenger/Messenger";
+import UpdateChatStatusButton from "../../components/ChatButtons/UpdateChatStatusButton";
 import axios from "axios";
 import { url } from "../../ApiUrl.js";
 
@@ -15,7 +15,7 @@ const Chats = (props) => {
         Authorization: "Bearer " + localStorage.getItem("token"),
       },
     });
-console.log(data)
+
     setState((prevState) => {
       return {
         ...prevState,
@@ -45,6 +45,7 @@ console.log(data)
               />
               <h1>{chat.user.fullname}</h1>
               <ul key={chat.user._id}>
+                <li>Status: {chat.status}</li>
                 <li>{chat.user.fullname}</li>
                 <li>{chat.user.country}</li>
                 <li>{chat.user.dateBirth.split("T")[0]}</li>
@@ -61,6 +62,10 @@ console.log(data)
                   )}
                 </li>
               </ul>
+              <UpdateChatStatusButton status="closed" chatId={chat._id}>
+                Mark as Closed
+              </UpdateChatStatusButton>
+              
             </div>
           );
         })}
